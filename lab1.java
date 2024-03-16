@@ -195,14 +195,13 @@ public class lab1 {
 
             System.out.println("Enter your choice: ");
 
-            int choice;
-            try {
-                choice = Integer.parseInt(System.console().readLine());
-            } catch (NumberFormatException e) {
-                System.out.println("Invalid choice. Please enter a number.");
-                continue;
+            int choice=0;
+            while(true){
+              choice=input.nextInt();
+              if (choice==1||choice==2||choice==3||choice==4) {
+                break;
+              }
             }
-
             int[] sortedArray;
             switch (choice) {
                 case 1:
@@ -212,12 +211,18 @@ public class lab1 {
                         System.out.println("2. intermediate arrays");
                         System.out.println("3. Both");
                         System.out.println("4. Exit");
-                        try {
-                            choice2 = Integer.parseInt(System.console().readLine());
-                        } catch (NumberFormatException e) {
-                            System.out.println("Invalid choice. Please enter a number.");
-                            continue;
-                        } 
+                        while(true){
+                            try {
+                                choice2=input.nextInt();  
+                            } catch (Exception e) {
+                                System.out.println("Invalid input");
+                                break;
+                            }
+                          
+                            if (choice2==1||choice2==2||choice2==3||choice2==4) {
+                              break;
+                            }
+                          }
                         switch (choice2) {
                             case 1:
                             sortedArray = sortArray.simpleSort(1); 
@@ -245,12 +250,12 @@ public class lab1 {
                     System.out.println("1. Final sorted array");
                     System.out.println("2. intermediate arrays");
                     System.out.println("3. Both");
-                    try {
-                        choice3 = Integer.parseInt(System.console().readLine());
-                    } catch (NumberFormatException e) {
-                        System.out.println("Invalid choice. Please enter a number.");
-                        continue;
-                    } 
+                    while(true){
+                        choice3=input.nextInt();
+                        if (choice3==1||choice3==2||choice3==3||choice3==4) {
+                          break;
+                        }
+                      }
                     switch (choice3) {
                         case 1:
                         sortedArray = sortArray.efficientSort(1); 
@@ -278,12 +283,12 @@ public class lab1 {
                     System.out.println("1. Final sorted array");
                     System.out.println("2. intermediate arrays");
                     System.out.println("3. Both");
-                    try {
-                        choice4 = Integer.parseInt(System.console().readLine());
-                    } catch (NumberFormatException e) {
-                        System.out.println("Invalid choice. Please enter a number.");
-                        continue;
-                    } 
+                    while(true){
+                        choice4=input.nextInt();
+                        if (choice4==1||choice4==2||choice4==3||choice4==4) {
+                          break;
+                        }
+                      }
                     switch (choice4) {
                         case 1:
                         sortedArray = sortArray.nonComparisonSort(1); 
