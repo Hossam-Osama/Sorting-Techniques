@@ -75,95 +75,106 @@ class SortArray {
     
 
     public int[] nonComparisonSort(int l) {
-          // filter array to 2 arrays +ve , -ve
-          int postive=0,negative=0;
-          for(int i=0;i<array.length;i++)
-          {
-             if(array[i]>=0)postive++;
-             else    negative++;
-          }
-          int positives[]=new int[postive];
-          int negatives[]=new int[negative];
-          int p=0,n=0;
-  
-          for(int i=0;i<array.length;i++)
-          {
-              if(array[i]>=0){
-                  positives[p++]=array[i];
-              }
-              else
-              {
-                  negatives[n++]=-1*array[i];
-              }
-          }
-          if (l==2||l==3) {
-            System.out.println("Fisrt split array to positives and negatives");
-            System.out.print("positives: ");
-            printArray(positives);
-            System.out.print("abs(negatives): ");
-            printArray(negatives);
-          }
-         
-          int maxp=getmax(positives);
-          int maxn=getmax(negatives);
-          if (l==2||l==3) { System.out.println("first thing to sort positives using radix sort");}
-         
-          for(int pos=1;maxp/pos>0;pos=pos*10)
-          {
-              countSortHelpRadix(positives,pos);
-          }
-          if (l==2||l==3) { System.out.print("positives after sorting:");
-          printArray(positives);
-          System.out.println("second thing to sort negatives using radix sort");}
-         
-          for(int pos=1;maxn/pos>0;pos=pos*10)
-          {
-                   countSortHelpRadix(negatives,pos);
-          }
-          if (l==2||l==3) {  System.out.print("negatives after sorting:");
-          printArray(negatives);}
-        
-          int i=0;
-          while(n-1>=0)
-          {
-            array[i++]=negatives[--n]*-1;
-          }
-          for(int k=0;k<positives.length;k++)
-          {
-            array[i++]=positives[k];
-          }
-         
-        return array;
-       
-    }
-    private int getmax(int arr[])
-    {
-        int max = Integer.MIN_VALUE;
-        for(int i=0;i<arr.length;i++)
+        // filter array to 2 arrays +ve , -ve
+        int postive=0,negative=0;
+        for(int i=0;i<array.length;i++)
         {
-            if(max<arr[i])max=arr[i];
+           if(array[i]>=0)postive++;
+           else    negative++;
         }
-        return max;
-    }
-    private void countSortHelpRadix(int a[],int pos)
-    {
-           int count[]=new int[10];
-           for(int i=0;i<10;i++)count[i]=0;
-           for(int i=0;i<a.length;i++)
-           {
-               ++count[(a[i]/pos)%10];
-           }
-           for(int i=1;i<10;i++)count[i]+=count[i-1];
-           int []b=new int[a.length];
-           for(int i=a.length-1;i>=0;i--)
-           {
-               b[--count[(a[i]/pos)%10]]=a[i];
-           }
+        int positives[]=new int[postive];
+        int negatives[]=new int[negative];
+        int p=0,n=0;
 
-           for(int i=0;i<a.length;i++)a[i]=b[i];
+        for(int i=0;i<array.length;i++)
+        {
+            if(array[i]>=0){
+                positives[p++]=array[i];
+            }
+            else
+            {
+                negatives[n++]=-1*array[i];
+            }
         }
+        if (l==2||l==3) {
+          System.out.println("Fisrt split array to positives and negatives");
+          System.out.print("positives: ");
+          printArray(positives);
+          System.out.print("abs(negatives): ");
+          printArray(negatives);
+        }
+       
+        int maxp=getmax(positives);
+        int maxn=getmax(negatives);
+        if (l==2||l==3) { System.out.println("first thing to sort positives using radix sort");}
+       
+        for(int pos=1;maxp/pos>0;pos=pos*10)
+        {
+            countSortHelpRadix(positives,pos,l);
+        }
+        if (l==2||l==3) { System.out.print("positives after sorting:");
+        printArray(positives);
+        System.out.println("second thing to sort negatives using radix sort");}
+       
+        for(int pos=1;maxn/pos>0;pos=pos*10)
+        {
+                 countSortHelpRadix(negatives,pos,l);
+        }
+        if (l==2||l==3) {  System.out.print("negatives after sorting:");
+        printArray(negatives);}
+      
+        int i=0;
+        while(n-1>=0)
+        {
+          array[i++]=negatives[--n]*-1;
+        }
+        for(int k=0;k<positives.length;k++)
+        {
+          array[i++]=positives[k];
+        }
+       
+      return array;
+     
+  }
+  private int getmax(int arr[])
+  {
+      int max = Integer.MIN_VALUE;
+      for(int i=0;i<arr.length;i++)
+      {
+          if(max<arr[i])max=arr[i];
+      }
+      return max;
+  }
+  private void countSortHelpRadix(int a[],int pos,int l)
+  {
+      int count[]=new int[10];
+      for(int i=0;i<10;i++)count[i]=0;
+      for(int i=0;i<a.length;i++)
+      {
+          ++count[(a[i]/pos)%10];
+      }
+      if (l==2||l==3){
+      System.out.print((Math.log10(pos)+1)+" ith iteration\n the array: a");
+      printArray(a);
+      System.out.print("count array: ");
+      printArray(count);
+      }
+      for(int i=1;i<10;i++)count[i]+=count[i-1];
+      if (l==2||l==3){
+      System.out.print("after prefix sum to array count:");
+      printArray(count);}
+      int []b=new int[a.length];
+      for(int i=a.length-1;i>=0;i--)
+      {
+          b[--count[(a[i]/pos)%10]]=a[i];
+      }
+      if (l==2||l==3){
+      System.out.print("sorted a according to pos "+(Math.log10(pos)+1)+"\na:");
+      printArray(b);}
 
-
+      for(int i=0;i<a.length;i++)a[i]=b[i];
+  }
+  
         void printArray(int[] arr) {
             System.out.print("[ ");
             for (int i = 0; i < arr.length; i++) {
@@ -195,12 +206,18 @@ public class lab1 {
 
             System.out.println("Enter your choice: ");
 
-            int choice=0;
-            while(true){
-              choice=input.nextInt();
-              if (choice==1||choice==2||choice==3||choice==4) {
-                break;
-              }
+            int choice = 0;
+            while (true) {
+                try {
+                    choice = Integer.parseInt(input.nextLine());
+                    if (choice >= 1 && choice <= 4) {
+                        break;
+                    } else {
+                        System.out.println("Invalid choice. Please enter a valid option.");
+                    }
+                } catch (NumberFormatException e) {
+                    System.out.println("Invalid input. Please enter a valid choice (1-4).");
+                }
             }
             int[] sortedArray;
             switch (choice) {
@@ -211,18 +228,18 @@ public class lab1 {
                         System.out.println("2. intermediate arrays");
                         System.out.println("3. Both");
                         System.out.println("4. Exit");
-                        while(true){
+                        while (true) {
                             try {
-                                choice2=input.nextInt();  
-                            } catch (Exception e) {
-                                System.out.println("Invalid input");
-                                break;
+                                choice2 = Integer.parseInt(input.nextLine());
+                                if (choice2 >= 1 && choice2 <= 4) {
+                                    break;
+                                } else {
+                                    System.out.println("Invalid choice. Please enter a valid option (1-4).");
+                                }
+                            } catch (NumberFormatException e) {
+                                System.out.println("Invalid input. Please enter a valid choice (1-4).");
                             }
-                          
-                            if (choice2==1||choice2==2||choice2==3||choice2==4) {
-                              break;
-                            }
-                          }
+                        }
                         switch (choice2) {
                             case 1:
                             sortedArray = sortArray.simpleSort(1); 
@@ -250,12 +267,18 @@ public class lab1 {
                     System.out.println("1. Final sorted array");
                     System.out.println("2. intermediate arrays");
                     System.out.println("3. Both");
-                    while(true){
-                        choice3=input.nextInt();
-                        if (choice3==1||choice3==2||choice3==3||choice3==4) {
-                          break;
+                    while (true) {
+                        try {
+                            choice3 = Integer.parseInt(input.nextLine());
+                            if (choice3 >= 1 && choice3 <= 4) {
+                                break;
+                            } else {
+                                System.out.println("Invalid choice. Please enter a valid option (1-4).");
+                            }
+                        } catch (NumberFormatException e) {
+                            System.out.println("Invalid input. Please enter a valid choice (1-4).");
                         }
-                      }
+                    }
                     switch (choice3) {
                         case 1:
                         sortedArray = sortArray.efficientSort(1); 
@@ -283,12 +306,18 @@ public class lab1 {
                     System.out.println("1. Final sorted array");
                     System.out.println("2. intermediate arrays");
                     System.out.println("3. Both");
-                    while(true){
-                        choice4=input.nextInt();
-                        if (choice4==1||choice4==2||choice4==3||choice4==4) {
-                          break;
+                    while (true) {
+                        try {
+                            choice4 = Integer.parseInt(input.nextLine());
+                            if (choice4 >= 1 && choice4 <= 4) {
+                                break;
+                            } else {
+                                System.out.println("Invalid choice. Please enter a valid option (1-4).");
+                            }
+                        } catch (NumberFormatException e) {
+                            System.out.println("Invalid input. Please enter a valid choice (1-4).");
                         }
-                      }
+                    }
                     switch (choice4) {
                         case 1:
                         sortedArray = sortArray.nonComparisonSort(1); 
