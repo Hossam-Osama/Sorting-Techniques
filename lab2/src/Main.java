@@ -1,16 +1,17 @@
 import java.util.Scanner;
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) {
-            System.out.println("Please provide the path of the input file.");
-            Scanner input=new Scanner(System.in);
-            String filePath =input.nextLine();
-            SortArray sortArray = new SortArray(filePath);
+        System.out.println("Please provide the path of the input file.");
+        Scanner input = new Scanner(System.in);
+        String filePath = input.nextLine();
+        SortArray sortArray = new SortArray(filePath);
 
-            // Main menu
-            while (true) {
+        // Main menu
+        while (true) {
+            // Back
+            boolean backToMenu = false;
+            while (!backToMenu) {
                 System.out.println("\n--- Sorting Algorithms Menu ---");
                 System.out.println("1. Simple Sort (O(n^2))");
                 System.out.println("2. Efficient Sort (O(n log n))");
@@ -36,12 +37,13 @@ public class Main {
                 int[] sortedArray;
                 switch (choice) {
                     case 1:
-                        int choice2=0;
-                        while(choice2!=1||choice2!=2||choice2!=3){
+                        while (true) {
                             System.out.println("1. Final sorted array");
-                            System.out.println("2. intermediate arrays");
+                            System.out.println("2. Intermediate arrays");
                             System.out.println("3. Both");
-                            System.out.println("4. Exit");
+                            System.out.println("4. Back");
+
+                            int choice2 = 0;
                             while (true) {
                                 try {
                                     choice2 = Integer.parseInt(input.nextLine());
@@ -59,7 +61,6 @@ public class Main {
                                     sortedArray = sortArray.simpleSort(1);
                                     sortArray.printArray(sortedArray);
                                     break;
-
                                 case 2:
                                     sortedArray = sortArray.simpleSort(2);
                                     break;
@@ -68,19 +69,24 @@ public class Main {
                                     sortArray.printArray(sortedArray);
                                     break;
                                 case 4:
-                                    return;
+                                    backToMenu = true;
+                                    break;
                                 default:
                                     System.out.println("Invalid choice. Please enter a valid option.");
                             }
+                            if (backToMenu) {
+                                break;
+                            }
                         }
+                        break;
                     case 2:
-
-
-                        int choice3=0;
-                        while(choice3!=1||choice3!=2||choice3!=3){
+                        while (true) {
                             System.out.println("1. Final sorted array");
-                            System.out.println("2. intermediate arrays");
+                            System.out.println("2. Intermediate arrays");
                             System.out.println("3. Both");
+                            System.out.println("4. Back");
+
+                            int choice3 = 0;
                             while (true) {
                                 try {
                                     choice3 = Integer.parseInt(input.nextLine());
@@ -98,7 +104,6 @@ public class Main {
                                     sortedArray = sortArray.efficientSort(1);
                                     sortArray.printArray(sortedArray);
                                     break;
-
                                 case 2:
                                     sortedArray = sortArray.efficientSort(2);
                                     sortArray.printArray(sortedArray);
@@ -108,25 +113,32 @@ public class Main {
                                     sortArray.printArray(sortedArray);
                                     break;
                                 case 4:
-                                    return;
+                                    backToMenu = true;
+                                    break;
                                 default:
                                     System.out.println("Invalid choice. Please enter a valid option.");
                             }
+                            if (backToMenu) {
+                                break;
+                            }
                         }
+                        break;
 
                     case 3:
-                        int choice4=0;
-                        while(choice4!=1||choice4!=2||choice4!=3){
+                        while (true) {
                             System.out.println("1. Final sorted array");
-                            System.out.println("2. intermediate arrays");
+                            System.out.println("2. Intermediate arrays");
                             System.out.println("3. Both");
+                            System.out.println("4. Back");
+
+                            int choice4 = 0;
                             while (true) {
                                 try {
                                     choice4 = Integer.parseInt(input.nextLine());
                                     if (choice4 >= 1 && choice4 <= 4) {
                                         break;
                                     } else {
-                                        System.out.println("Invalid choice. Please enter a valid option (1-4).");
+                                        System.out.println("Invalid choice. Please entera valid option (1-4).");
                                     }
                                 } catch (NumberFormatException e) {
                                     System.out.println("Invalid input. Please enter a valid choice (1-4).");
@@ -137,7 +149,6 @@ public class Main {
                                     sortedArray = sortArray.nonComparisonSort(1);
                                     sortArray.printArray(sortedArray);
                                     break;
-
                                 case 2:
                                     sortedArray = sortArray.nonComparisonSort(2);
                                     break;
@@ -146,16 +157,24 @@ public class Main {
                                     sortArray.printArray(sortedArray);
                                     break;
                                 case 4:
-                                    return;
+                                    backToMenu = true;
+                                    break;
                                 default:
                                     System.out.println("Invalid choice. Please enter a valid option.");
                             }
+                            if (backToMenu) {
+                                break;
+                            }
                         }
+                        break;
+
                     case 4:
                         return;
+
                     default:
                         System.out.println("Invalid choice. Please enter a valid option.");
                 }
             }
         }
+    }
 }
