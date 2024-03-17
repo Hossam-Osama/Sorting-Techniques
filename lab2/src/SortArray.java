@@ -27,6 +27,66 @@ class SortArray {
             e.printStackTrace();
         }
     }
+    void mergeArr(int []nums, int begin, int mid, int end,int l) {
+        int sizeL = mid - begin;
+        int sizeR = end - mid - 1;
+
+
+        int left[]=new int[sizeL+1];
+        int right[]=new int[sizeR+1];
+
+        for (int i = 0; i <= sizeL; i++) {
+            left[i] = nums[begin + i];
+        }
+        for (int i = 0; i <= sizeR; i++) {
+            right[i] = nums[mid + i + 1];
+        }
+        int indexLeft = 0;
+        int indexRight = 0;
+
+        int index = begin;
+
+        while (indexLeft <= sizeL && (indexRight) <= sizeR) {
+            if (left[indexLeft] <= right[indexRight]) {
+                nums[index] = left[indexLeft];
+                indexLeft++;
+            } else {
+                nums[index] = right[indexRight];
+                indexRight++;
+            }
+            index++;
+        }
+        if (indexLeft <= sizeL) {
+            while (indexLeft <= sizeL) {
+                nums[index] = left[indexLeft];
+                index++;
+                indexLeft++;
+            }
+        } else {
+            while (indexRight <= sizeR) {
+                nums[index] = right[indexRight];
+                index++;
+                indexRight++;
+            }
+        }
+   if (l==2||l==3) {
+    System.out.print("[ ");
+        for(int i=begin;i<end;i++){
+            System.out.print(nums[i]+" ,");
+        }
+        System.out.println(nums[end]+" ]");
+   } 
+    }
+    void merge(int []nums, int begin, int end,int l) {
+        if (begin >= end) {
+            // if one element begin greater than end
+            return;
+        }
+        int mid = (begin + end) / 2;
+        merge(nums, begin, mid ,l);
+        merge(nums, mid + 1, end,l);
+        mergeArr(nums,begin,mid,end,l);
+    }
 
     public int[] simpleSort(int i) {
         if(i==1||i==3){                                           // if 1 or 3 it will sort the array and return final array
@@ -66,9 +126,10 @@ class SortArray {
         return array;
     }
 
-    public int[] efficientSort(int i) {
+    public int[] efficientSort(int l) {
+        int size=array.length-1;
+        merge(array,0,size,l);
         return array;
-
     }
 
 
