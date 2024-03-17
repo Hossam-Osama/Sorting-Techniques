@@ -106,7 +106,7 @@ public class Main {
                                     break;
                                 case 2:
                                     sortedArray = sortArray.efficientSort(2);
-                                    sortArray.printArray(sortedArray);
+                                 
                                     break;
                                 case 3:
                                     sortedArray = sortArray.efficientSort(3);
