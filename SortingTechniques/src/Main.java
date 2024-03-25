@@ -106,7 +106,7 @@ public class Main {
                                     break;
                                 case 2:
                                     sortedArray = sortArray.efficientSort(2);
-                                 
+                                    sortArray.printArray(sortedArray);
                                     break;
                                 case 3:
                                     sortedArray = sortArray.efficientSort(3);
@@ -138,7 +138,7 @@ public class Main {
                                     if (choice4 >= 1 && choice4 <= 4) {
                                         break;
                                     } else {
-                                        System.out.println("Invalid choice. Please entera valid option (1-4).");
+                                        System.out.println("Invalid choice. Please enter a valid option (1-4).");
                                     }
                                 } catch (NumberFormatException e) {
                                     System.out.println("Invalid input. Please enter a valid choice (1-4).");
