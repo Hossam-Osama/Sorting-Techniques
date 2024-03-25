@@ -16,9 +16,11 @@ class SortArray {
     private void readInputFile(String filePath) {              //to read the array from the file 
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
             String line = reader.readLine();
-            String line2=line.substring(1, line.length()-1);
-            //    System.out.println(line2);
-            String[] elements = line2.split(",");
+            if (line.startsWith("[") && line.endsWith("]")) {
+                line = line.substring(1, line.length() - 1);
+            }
+                System.out.println(line);
+            String[] elements = line.split(",");
             array = new int[elements.length];
             for (int i = 0; i < elements.length; i++) {
                 array[i] = Integer.parseInt(elements[i]);
